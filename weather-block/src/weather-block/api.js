@@ -2,6 +2,7 @@
  * WordPress dependencies
  */
 import apiFetch from '@wordpress/api-fetch';
+import { addQueryArgs } from '@wordpress/url';
 
 /**
  * Fetch weather data from the API.
@@ -11,5 +12,6 @@ import apiFetch from '@wordpress/api-fetch';
  */
 export function fetchWeather( attributes ) {
 	const { location, units } = attributes;
-	return apiFetch( { path: `/weather-block/v1/weather?location=${ location }&units=${ units }` } );
+	const path = addQueryArgs( '/weather-block/v1/weather', { location, units } );
+	return apiFetch( { path } );
 }

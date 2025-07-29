@@ -154,7 +154,9 @@ function weather_block_register_rest_endpoint() {
 		array(
 			'methods'             => 'GET',
 			'callback'            => 'weather_block_fetch_weather_data',
-			'permission_callback' => '__return_true', // TODO: Add a proper permission check.
+			'permission_callback' => function () {
+				return wp_verify_nonce( $_REQUEST['_wpnonce'], 'wp_rest' );
+			},
 		)
 	);
 }
