@@ -1,0 +1,37 @@
+name: CI
+
+on:
+	push:
+		branches:
+			- main
+
+pjobs:
+	lint:
+		runs-on: ubuntu-latest
+		steps:
+			- uses: actions/checkout@v3
+			- name: Setup Node.js
+				uses: actions/setup-node@v3
+				with:
+					node-version: '18'
+			- name: Install npm dependencies
+				run: npm install
+			- name: Run ESLint
+				run: npm run lint:js
+			- name: Run PHPCS
+				run: ./vendor/bin/phpcs
+
+	test:
+		runs-on: ubuntu-latest
+		steps:
+			- uses: actions/checkout@v3
+			- name: Setup Node.js
+				uses: actions/setup-node@v3
+				with:
+					node-version: '18'
+			- name: Install npm dependencies
+				run: npm install
+			- name: Run Jest
+				run: npm run test:unit
+			- name: Run Playwright
+				run: npm run test:e2e

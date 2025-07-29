@@ -1,0 +1,33 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "create-block/weather-block",
+  "version": "0.1.0",
+  "title": "Weather Block",
+  "category": "widgets",
+  "icon": "cloud",
+  "description": "A block to display current weather conditions.",
+  "example": {},
+  "supports": {
+    "html": false
+  },
+  "attributes": {
+    "location": {
+      "type": "string",
+      "default": ""
+    },
+    "units": {
+      "type": "string",
+      "default": "metric"
+    },
+    "displayMode": {
+      "type": "string",
+      "default": "light"
+    }
+  },
+  "textdomain": "weather-block",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js"
+}
