@@ -13,12 +13,8 @@ import { useBlockProps } from '@wordpress/block-editor';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#save
  *
- * @return {Element} Element to render.
+ * @return {null} Null.
  */
 export default function save() {
-	return (
-		<p { ...useBlockProps.save() }>
-			{ 'Weather Block – hello from the saved content!' }
-		</p>
-	);
+	return null;
 }

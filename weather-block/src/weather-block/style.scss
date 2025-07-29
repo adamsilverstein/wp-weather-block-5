@@ -1,12 +1,21 @@
-/**
- * The following styles get applied both on the front of your site
- * and in the editor.
- *
- * Replace them with your own styles or remove the file completely.
- */
+.weather-block-display {
+	--background-color: #fff;
+	--text-color: #000;
 
-.wp-block-create-block-weather-block {
-	background-color: #21759b;
-	color: #fff;
-	padding: 2px;
+	background-color: var(--background-color);
+	color: var(--text-color);
+	padding: 1rem;
+	border: 1px solid #ccc;
+
+	&.dark {
+		--background-color: #000;
+		--text-color: #fff;
+	}
+
+	@media (prefers-color-scheme: dark) {
+		&.auto {
+			--background-color: #000;
+			--text-color: #fff;
+		}
+	}
 }

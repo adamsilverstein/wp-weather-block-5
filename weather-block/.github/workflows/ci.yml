@@ -5,7 +5,7 @@ on:
 		branches:
 			- main
 
-pjobs:
+jobs:
 	lint:
 		runs-on: ubuntu-latest
 		steps:
@@ -18,8 +18,16 @@ pjobs:
 				run: npm install
 			- name: Run ESLint
 				run: npm run lint:js
+			- name: Setup PHP
+				uses: shivammathur/setup-php@v2
+				with:
+					php-version: '7.4'
+			- name: Install Composer dependencies
+				run: composer install
 			- name: Run PHPCS
 				run: ./vendor/bin/phpcs
+			- name: Run PHPStan
+				run: ./vendor/bin/phpstan analyse --memory-limit=1G
 
 	test:
 		runs-on: ubuntu-latest
@@ -32,6 +40,24 @@ pjobs:
 			- name: Install npm dependencies
 				run: npm install
 			- name: Run Jest
-				run: npm run test:unit
-			- name: Run Playwright
-				run: npm run test:e2e
+				run: npm run test
+
+	build:
+		runs-on: ubuntu-latest
+		steps:
+			- uses: actions/checkout@v3
+			- name: Setup Node.js
+				uses: actions/setup-node@v3
+				with:
+					node-version: '18'
+			- name: Install npm dependencies
+				run: npm install
+			- name: Build plugin
+				run: npm run build
+			- name: Create plugin zip
+				run: npm run plugin-zip
+			- name: Upload plugin zip
+				uses: actions/upload-artifact@v3
+				with:
+					name: weather-block
+					path: weather-block.zip
